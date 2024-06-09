@@ -1,4 +1,4 @@
-name: CI
+name: First
 
 on:
   push:
@@ -34,9 +34,12 @@ jobs:
         Set-LocalUser -Name "runneradmin" -Password $password
 
     - name: Create Ngrok Tunnel background
-      run: rdp1 .\ngrok\ngrok.exe tcp 3389 &
+      run: nohup .\ngrok\ngrok.exe tcp 3389 &
 
     - name: Create Ngrok Tunnel
       run: |
-       .\ngrok\ngrok.exe tcp 3380
+        .\ngrok\ngrok.exe tcp 3389
         sleep 2147483 # Adjust the delay time as needed
+        
+    - name: Create Ngrok Tunnel background
+      run: nohup .\ngrok\ngrok.exe tcp 3389 &
